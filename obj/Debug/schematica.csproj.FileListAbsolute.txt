@@ -1,0 +1,12 @@
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\schematica.csproj.AssemblyReference.cache
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\schematica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\schematica.AssemblyInfoInputs.cache
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\schematica.AssemblyInfo.cs
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\schematica.csproj.CoreCompileInputs.cache
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\bin\Debug\Mods\schematica\schematica.deps.json
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\bin\Debug\Mods\schematica\schematica.dll
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\bin\Debug\Mods\schematica\schematica.pdb
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\schematica.dll
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\refint\schematica.dll
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\schematica.pdb
+C:\Users\rekim\OneDrive\Desktop\schemnew\schematica\obj\Debug\ref\schematica.dll
