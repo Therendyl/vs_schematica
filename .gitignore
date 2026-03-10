@@ -1,0 +1,36 @@
+# Build outputs
+/bin/
+/obj/
+/Releases/
+/artifacts/
+/.tmp/
+/artifacts/bin/
+/artifacts/obj/
+/artifacts/logs/
+/artifacts/releases/*.zip
+/artifacts/releases/*.sha256
+/artifacts/releases/*.json
+
+# Runtime/local metadata
+/artifacts/releases/release-manifest.json
+# User-specific IDE files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
+.vs/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+Thumbs.db
+desktop.ini
+
+# OS files
+.DS_Store
+
+# Mod-specific generated settings
+/Properties/localSettings.props
+properties/localSettings.props
