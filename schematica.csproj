@@ -4,6 +4,7 @@
     <ModName>$(Product)</ModName>
     <ModType>code</ModType>
     <ModVersion>$(Version)</ModVersion>
+    <ModVersion Condition="'$(ModVersion)' == ''">1.0.0</ModVersion>
     <ModId>$(PackageId)</ModId>
     <Description>$(Description)</Description>
     <Side>Client</Side>
@@ -39,7 +40,7 @@
     <AssetsDir>$(ProjectDir)\resources\assets</AssetsDir>
     <ModIconFile>$(ProjectDir)\resources\modicon.png</ModIconFile>
     <ReleasesDir>$(ProjectDir)\Releases</ReleasesDir>
-    <ArtifactFileName>$(ModId)_$(ModVersion)</ArtifactFileName>
+    <ArtifactFileName>$(ModId)-$(ModVersion)</ArtifactFileName>
     <ReleaseFile>$(ArtifactFileName)</ReleaseFile>
     <ReleasePath>$(ReleasesDir)\$(ReleaseFile).zip</ReleasePath>
     <ReleasePathDev>$(ReleasesDir)\$(ReleaseFile)_dev.zip</ReleasePathDev>
@@ -97,7 +98,7 @@
       <HintPath>$(GameDirectory)\Mods\VSSurvivalMod.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Folder Include="resources\assets\schematica" />
+    <Folder Include="resources\assets\schematicaplus" />
   </ItemGroup>
 
   <!-- Creating local settings file -->
@@ -174,3 +175,4 @@
     <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePathDev)" />
   </Target>
 </Project>
+

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36301.6 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "schematica", "schematica.csproj", "{225131D3-4402-4BA4-AD49-5E5608802235}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "schematicaplus", "schematica.csproj", "{225131D3-4402-4BA4-AD49-5E5608802235}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,3 +23,4 @@ Global
 		SolutionGuid = {F2C20686-B694-44D0-871C-7E01DB38C2A2}
 	EndGlobalSection
 EndGlobal
+

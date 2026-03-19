@@ -122,12 +122,12 @@ namespace Schematica.Rendering
             }
             catch (FormatException ex)
             {
-                api.Logger.Error($"[Schematica] Error checking chiseled block: {ex.Message}");
+                api.Logger.Error($"[Schematica Plus] Error checking chiseled block: {ex.Message}");
                 return false;
             }
             catch (IOException ex)
             {
-                api.Logger.Error($"[Schematica] Error checking chiseled block: {ex.Message}");
+                api.Logger.Error($"[Schematica Plus] Error checking chiseled block: {ex.Message}");
                 return false;
             }
         }
@@ -164,3 +164,6 @@ namespace Schematica.Rendering
         }
     }
 }
+
+
+

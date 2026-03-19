@@ -27,7 +27,7 @@ namespace Schematica.Commands
         private void RegisterCommands()
         {
             capi.ChatCommands.GetOrCreate("schem")
-                .WithDescription("Schematica commands")
+                .WithDescription("Schematica Plus commands")
                 .RequiresPlayer()
                 .BeginSubCommand("start")
                     .WithDescription("Set start position")
@@ -119,7 +119,7 @@ namespace Schematica.Commands
             if (sel == null) return TextCommandResult.Error("You must be looking at a block!");
 
             startPos = sel.Position.Copy();
-            capi.ShowChatMessage(Lang.Get("schematica:msg-set-start", startPos));
+            capi.ShowChatMessage(Lang.Get("schematicaplus:msg-set-start", startPos));
             return TextCommandResult.Success();
         }
 
@@ -129,7 +129,7 @@ namespace Schematica.Commands
             if (sel == null) return TextCommandResult.Error("You must be looking at a block!");
 
             endPos = sel.Position.Copy();
-            capi.ShowChatMessage(Lang.Get("schematica:msg-set-end", endPos));
+            capi.ShowChatMessage(Lang.Get("schematicaplus:msg-set-end", endPos));
             return TextCommandResult.Success();
         }
 
@@ -148,7 +148,7 @@ namespace Schematica.Commands
                 var schematic = BlockSchematicStructure.CreateFromSelection(capi, begin, end);
                 BlockSchematicStructure.SaveToFile(capi, schematic, filename);
 
-                capi.ShowChatMessage(Lang.Get("schematica:msg-schematic-saved", filename, schematic.TotalBlocks));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-schematic-saved", filename, schematic.TotalBlocks));
                 return TextCommandResult.Success();
             }
             catch (ArgumentNullException ex)
@@ -157,19 +157,19 @@ namespace Schematica.Commands
             }
             catch (JsonException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-save", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
             catch (IOException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-save", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
             catch (UnauthorizedAccessException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-save", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
             catch (InvalidOperationException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-save", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
         }
 
@@ -182,7 +182,7 @@ namespace Schematica.Commands
                 var schematic = BlockSchematicStructure.LoadFromFile(capi, filename);
                 modSystem.LoadSchematic(schematic);
 
-                capi.ShowChatMessage(Lang.Get("schematica:msg-schematic-loaded", filename, schematic.TotalBlocks, schematic.MaxY + 1));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-schematic-loaded", filename, schematic.TotalBlocks, schematic.MaxY + 1));
                 return TextCommandResult.Success();
             }
             catch (ArgumentNullException ex)
@@ -191,47 +191,47 @@ namespace Schematica.Commands
             }
             catch (JsonException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-load", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
             catch (IOException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-load", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
             catch (UnauthorizedAccessException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-load", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
             catch (InvalidOperationException ex)
             {
-                return TextCommandResult.Error(Lang.Get("schematica:msg-failed-load", ex.Message));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
         }
 
         private TextCommandResult OnCmdHere(TextCommandCallingArgs args)
         {
             if (modSystem.CurrentSchematic == null)
-                return TextCommandResult.Error(Lang.Get("schematica:msg-please-select"));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-please-select"));
 
             var sel = capi.World.Player.CurrentBlockSelection;
             if (sel == null)
                 return TextCommandResult.Error("You must be looking at a block!");
 
             modSystem.Renderer.SetRenderOrigin(sel.Position);
-            capi.ShowChatMessage(Lang.Get("schematica:msg-set-render", modSystem.Renderer.CurrentLayer, modSystem.CurrentSchematic.MaxY));
+            capi.ShowChatMessage(Lang.Get("schematicaplus:msg-set-render", modSystem.Renderer.CurrentLayer, modSystem.CurrentSchematic.MaxY));
             return TextCommandResult.Success();
         }
 
         private TextCommandResult OnCmdClear(TextCommandCallingArgs args)
         {
             modSystem.ClearSchematic();
-            capi.ShowChatMessage(Lang.Get("schematica:msg-cleared"));
+            capi.ShowChatMessage(Lang.Get("schematicaplus:msg-cleared"));
             return TextCommandResult.Success();
         }
 
         private TextCommandResult OnCmdLayerSet(TextCommandCallingArgs args)
         {
             if (modSystem.CurrentSchematic == null)
-                return TextCommandResult.Error(Lang.Get("schematica:msg-please-select"));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-please-select"));
 
             int layer = (int)args[0];
             modSystem.Renderer.SetLayer(layer);
@@ -241,7 +241,7 @@ namespace Schematica.Commands
         private TextCommandResult OnCmdLayerNext(TextCommandCallingArgs args)
         {
             if (modSystem.CurrentSchematic == null)
-                return TextCommandResult.Error(Lang.Get("schematica:msg-please-select"));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-please-select"));
 
             modSystem.Renderer.NextLayer();
             return TextCommandResult.Success();
@@ -250,7 +250,7 @@ namespace Schematica.Commands
         private TextCommandResult OnCmdLayerPrev(TextCommandCallingArgs args)
         {
             if (modSystem.CurrentSchematic == null)
-                return TextCommandResult.Error(Lang.Get("schematica:msg-please-select"));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-please-select"));
 
             modSystem.Renderer.PreviousLayer();
             return TextCommandResult.Success();
@@ -259,7 +259,7 @@ namespace Schematica.Commands
         private TextCommandResult OnCmdLayerAll(TextCommandCallingArgs args)
         {
             if (modSystem.CurrentSchematic == null)
-                return TextCommandResult.Error(Lang.Get("schematica:msg-please-select"));
+                return TextCommandResult.Error(Lang.Get("schematicaplus:msg-please-select"));
 
             modSystem.Renderer.ToggleAllLayers();
             return TextCommandResult.Success();
@@ -272,11 +272,11 @@ namespace Schematica.Commands
                 var schematics = BlockSchematicStructure.GetAvailableSchematics(capi);
                 if (schematics.Count == 0)
                 {
-                    capi.ShowChatMessage(Lang.Get("schematica:msg-no-schematics"));
+                    capi.ShowChatMessage(Lang.Get("schematicaplus:msg-no-schematics"));
                 }
                 else
                 {
-                    capi.ShowChatMessage(Lang.Get("schematica:msg-available-schematics", schematics.Count));
+                    capi.ShowChatMessage(Lang.Get("schematicaplus:msg-available-schematics", schematics.Count));
                     foreach (var schematic in schematics)
                     {
                         capi.ShowChatMessage($"  - {schematic}");
@@ -376,7 +376,7 @@ namespace Schematica.Commands
         private TextCommandResult OnCmdProfileRuntimeReload(TextCommandCallingArgs args)
         {
             modSystem.ReloadRuntimeConfig();
-            capi.ShowChatMessage("Schematica runtime optimization config reloaded.");
+            capi.ShowChatMessage("Schematica Plus runtime optimization config reloaded.");
             return TextCommandResult.Success();
         }
 
@@ -385,8 +385,11 @@ namespace Schematica.Commands
             int seconds = (int)args[0];
             int clamped = Math.Clamp(seconds, 1, 300);
             modSystem.EnableRendererDebugBurst(clamped);
-            capi.ShowChatMessage($"Schematica renderer debug burst enabled for {clamped}s.");
+            capi.ShowChatMessage($"Schematica Plus renderer debug burst enabled for {clamped}s.");
             return TextCommandResult.Success();
         }
     }
 }
+
+
+

@@ -1036,3 +1036,6 @@ namespace Schematica.Core
         public int Z { get; set; }
     }
 }
+
+
+

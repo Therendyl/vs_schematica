@@ -30,3 +30,6 @@ namespace Schematica.Core
         public BlockPos Position => new BlockPos(X, Y, Z);
     }
 }
+
+
+

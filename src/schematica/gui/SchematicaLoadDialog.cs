@@ -48,15 +48,15 @@ namespace Schematica.GUI
             bgBounds.BothSizing = ElementSizing.FitToChildren;
 
             var composer = capi.Gui
-                .CreateCompo("schematica_load_dialog", dialogBounds)
+                .CreateCompo("schematicaplus_load_dialog", dialogBounds)
                 .AddShadedDialogBG(bgBounds)
-                .AddDialogTitleBar(Lang.Get("schematica:gui-load-title"), OnTitleBarClose)
+                .AddDialogTitleBar(Lang.Get("schematicaplus:gui-load-title"), OnTitleBarClose)
                 .BeginChildElements(bgBounds);
 
             const double topOffset = 20;
 
             // Schematic selection
-            composer.AddStaticText(Lang.Get("schematica:gui-select-schematic"), CairoFont.WhiteDetailText(),
+            composer.AddStaticText(Lang.Get("schematicaplus:gui-select-schematic"), CairoFont.WhiteDetailText(),
                 ElementBounds.Fixed(0, 5 + topOffset, 460, 20));
             composer.AddDropDown(GetSchematicsList(), GetSchematicsList(), 0, OnSchematicSelected,
                 ElementBounds.Fixed(0, 30 + topOffset, 460, 30), "schematicsList");
@@ -69,22 +69,22 @@ namespace Schematica.GUI
             double controlButtonWidth = controlRowWidth / controlButtonCount;
             double controlRowY = 160 + topOffset;
 
-            composer.AddSmallButton(Lang.Get("schematica:gui-load"), OnLoadClick,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-load"), OnLoadClick,
                 ElementBounds.Fixed(0 * controlButtonWidth, controlRowY, controlButtonWidth, 30), EnumButtonStyle.Normal);
-            composer.AddSmallButton(Lang.Get("schematica:gui-refresh"), OnRefreshClick,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-refresh"), OnRefreshClick,
                 ElementBounds.Fixed(1 * controlButtonWidth, controlRowY, controlButtonWidth, 30), EnumButtonStyle.Normal);
-            composer.AddSmallButton(Lang.Get("schematica:gui-clear"), OnClearClick,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-clear"), OnClearClick,
                 ElementBounds.Fixed(2 * controlButtonWidth, controlRowY, controlButtonWidth, 30), EnumButtonStyle.Normal);
-            composer.AddSmallButton(Lang.Get("schematica:gui-set-here"), OnSetHereClick,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-set-here"), OnSetHereClick,
                 ElementBounds.Fixed(3 * controlButtonWidth, controlRowY, controlButtonWidth, 30), EnumButtonStyle.Normal);
-            composer.AddSmallButton(Lang.Get("schematica:gui-info"), OnInfoClick,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-info"), OnInfoClick,
                 ElementBounds.Fixed(4 * controlButtonWidth, controlRowY, controlButtonWidth, 30), EnumButtonStyle.Normal);
 
             var builder = new SchematicaUIBuilder(composer, capi);
 
             // Position controls with direction buttons
             builder.AddPositionInputs(
-                Lang.Get("schematica:gui-render-position"), 210 + (int)topOffset,
+                Lang.Get("schematicaplus:gui-render-position"), 210 + (int)topOffset,
                 renderPos, worldSpawn,
                 OnPosXChanged, OnPosYChanged, OnPosZChanged,
                 "posX", "posY", "posZ"
@@ -139,17 +139,17 @@ namespace Schematica.GUI
             }
             catch (IOException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to list schematics: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to list schematics: {ex.Message}");
                 return Array.Empty<string>();
             }
             catch (UnauthorizedAccessException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to list schematics: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to list schematics: {ex.Message}");
                 return Array.Empty<string>();
             }
             catch (JsonException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to list schematics: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to list schematics: {ex.Message}");
                 return Array.Empty<string>();
             }
         }
@@ -215,7 +215,7 @@ namespace Schematica.GUI
         {
             if (modSystem.CurrentSchematic == null)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-please-select"));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-please-select"));
                 return true;
             }
 
@@ -289,7 +289,7 @@ namespace Schematica.GUI
             var relZ = renderPos.Z - worldSpawn.Z;
             var culture = CultureInfo.InvariantCulture;
 
-            capi.Logger.Debug($"[Schematica] UpdatePositionInputs: renderPos={renderPos}, worldSpawn={worldSpawn}, relative=({relX}, {renderPos.Y}, {relZ})");
+            capi.Logger.Debug($"[Schematica Plus] UpdatePositionInputs: renderPos={renderPos}, worldSpawn={worldSpawn}, relative=({relX}, {renderPos.Y}, {relZ})");
 
             SingleComposer.GetTextInput("posX").SetValue(relX.ToString(culture));
             SingleComposer.GetTextInput("posY").SetValue(renderPos.Y.ToString(culture));
@@ -321,7 +321,7 @@ namespace Schematica.GUI
         {
             if (string.IsNullOrEmpty(selectedSchematic))
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-please-select"));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-please-select"));
                 return true;
             }
 
@@ -332,28 +332,28 @@ namespace Schematica.GUI
 
                 modSystem.Renderer.SetRenderOrigin(renderPos);
                 modSystem.Renderer.SetShowAllLayers(showAllLayers);
-                capi.ShowChatMessage(Lang.Get("schematica:msg-schematic-loaded", selectedSchematic, schematic.TotalBlocks, schematic.MaxY + 1));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-schematic-loaded", selectedSchematic, schematic.TotalBlocks, schematic.MaxY + 1));
                 UpdateLayerControls();
             }
             catch (InvalidDataException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-load", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
             catch (IOException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-load", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
             catch (UnauthorizedAccessException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-load", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
             catch (JsonException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-load", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
             catch (ArgumentException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-load", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-load", ex.Message));
             }
 
             return true;
@@ -369,7 +369,7 @@ namespace Schematica.GUI
         {
             modSystem.ClearSchematic();
             UpdateLayerControls();
-            capi.ShowChatMessage(Lang.Get("schematica:msg-cleared"));
+            capi.ShowChatMessage(Lang.Get("schematicaplus:msg-cleared"));
             return true;
         }
 
@@ -398,7 +398,7 @@ namespace Schematica.GUI
                 var schematic = BlockSchematicStructure.LoadFromFile(capi, selectedSchematic);
                 if (schematic == null)
                 {
-                    infoLabel.SetNewText(Lang.Get("schematica:msg-failed-load", selectedSchematic), CairoFont.WhiteDetailText());
+                    infoLabel.SetNewText(Lang.Get("schematicaplus:msg-failed-load", selectedSchematic), CairoFont.WhiteDetailText());
                     return;
                 }
 
@@ -460,16 +460,16 @@ namespace Schematica.GUI
 
             if (modSystem.CurrentSchematic != null && !showAllLayers)
             {
-                layerText.SetNewText(Lang.Get("schematica:gui-current-layer",
+                layerText.SetNewText(Lang.Get("schematicaplus:gui-current-layer",
                     modSystem.Renderer.CurrentLayer, modSystem.CurrentSchematic.MaxY));
             }
             else if (showAllLayers)
             {
-                layerText.SetNewText(Lang.Get("schematica:gui-showing-all-layers"));
+                layerText.SetNewText(Lang.Get("schematicaplus:gui-showing-all-layers"));
             }
             else
             {
-                layerText.SetNewText(Lang.Get("schematica:gui-no-schematic"));
+                layerText.SetNewText(Lang.Get("schematicaplus:gui-no-schematic"));
             }
         }
 
@@ -510,3 +510,6 @@ namespace Schematica.GUI
         }
     }
 }
+
+
+

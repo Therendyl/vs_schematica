@@ -2,9 +2,9 @@
   <PropertyGroup>
     <BaseIntermediateOutputPath>$(MSBuildProjectDirectory)\obj\</BaseIntermediateOutputPath>
     <Version>1.0.3</Version>
-    <PackageId>schematica</PackageId>
-    <Product>Schematica</Product>
-    <Description>Vintage Story client-side schematic helper.</Description>
+    <PackageId>schematicaplus</PackageId>
+    <Product>Schematica Plus</Product>
+    <Description>A building assistant mod that allows you to save, load, and visualize block structures.</Description>
     <Authors>rekimchuk13</Authors>
     <Company>Community</Company>
     <TargetFramework>net8.0</TargetFramework>
@@ -22,3 +22,4 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 </Project>
+

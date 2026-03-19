@@ -9,7 +9,7 @@ namespace Schematica.GUI
     {
         private readonly SchematicaModSystem modSystem;
 
-        public override string ToggleKeyCombinationCode => "schematica_gui";
+        public override string ToggleKeyCombinationCode => "schematicaplus_gui";
 
         public SchematicaMainDialog(ICoreClientAPI capi, SchematicaModSystem modSystem) : base(capi)
         {
@@ -31,12 +31,12 @@ namespace Schematica.GUI
             ElementBounds loadButtonBounds = ElementBounds.Fixed(40, 80, 200, 40);
 
             SingleComposer = capi.Gui
-                .CreateCompo("schematica_main_dialog", dialogBounds)
+                .CreateCompo("schematicaplus_main_dialog", dialogBounds)
                 .AddShadedDialogBG(bgBounds)
-                .AddDialogTitleBar(Lang.Get("schematica:gui-title"), OnTitleBarClose, CairoFont.WhiteDetailText())
+                .AddDialogTitleBar(Lang.Get("schematicaplus:gui-title"), OnTitleBarClose, CairoFont.WhiteDetailText())
                 .BeginChildElements(bgBounds)
-                    .AddButton(Lang.Get("schematica:gui-save-menu"), OnSaveMenuClick, saveButtonBounds, EnumButtonStyle.Normal)
-                    .AddButton(Lang.Get("schematica:gui-load-menu"), OnLoadMenuClick, loadButtonBounds, EnumButtonStyle.Normal)
+                    .AddButton(Lang.Get("schematicaplus:gui-save-menu"), OnSaveMenuClick, saveButtonBounds, EnumButtonStyle.Normal)
+                    .AddButton(Lang.Get("schematicaplus:gui-load-menu"), OnLoadMenuClick, loadButtonBounds, EnumButtonStyle.Normal)
                 .EndChildElements()
                 .Compose();
         }
@@ -61,3 +61,6 @@ namespace Schematica.GUI
         }
     }
 }
+
+
+

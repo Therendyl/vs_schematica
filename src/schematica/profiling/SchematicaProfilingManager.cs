@@ -71,7 +71,7 @@ namespace Schematica.Profiling
             autoStartPending = config.Enabled && config.AutoStartOnWorldLoad;
         }
 
-        public string ConfigPath => Path.Combine(GetProfilingRootDirectory(), "schematica.profiling.json");
+        public string ConfigPath => Path.Combine(GetProfilingRootDirectory(), "schematicaplus.profiling.json");
         public string ProfilesDirectoryPath => GetProfilesDirectory();
         public string LatestSummaryPath => latestSummaryPath;
         public bool IsRunning => isRunning;
@@ -97,7 +97,7 @@ namespace Schematica.Profiling
 
             if (isRunning)
             {
-                message = "Schematica profiling is already running.";
+                message = "Schematica Plus profiling is already running.";
                 return false;
             }
 
@@ -127,7 +127,7 @@ namespace Schematica.Profiling
             }
 
             StartRunInternal();
-            message = $"Schematica profiling started. RunId={runId}";
+            message = $"Schematica Plus profiling started. RunId={runId}";
             return true;
         }
 
@@ -135,14 +135,14 @@ namespace Schematica.Profiling
         {
             if (!isRunning)
             {
-                message = "Schematica profiling is not running.";
+                message = "Schematica Plus profiling is not running.";
                 return false;
             }
 
             CompleteRunInternal("Stopped by user command.", completed: false);
             message = string.IsNullOrWhiteSpace(latestSummaryPath)
-                ? "Schematica profiling stopped."
-                : $"Schematica profiling stopped. Summary: {latestSummaryPath}";
+                ? "Schematica Plus profiling stopped."
+                : $"Schematica Plus profiling stopped. Summary: {latestSummaryPath}";
             return true;
         }
 
@@ -617,28 +617,28 @@ namespace Schematica.Profiling
 
                 if (config.ChatNotifications)
                 {
-                    capi.ShowChatMessage($"Schematica profiling completed. Summary: {summaryPath}");
+                    capi.ShowChatMessage($"Schematica Plus profiling completed. Summary: {summaryPath}");
                 }
             }
             catch (IOException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to persist profiling artifacts: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to persist profiling artifacts: {ex.Message}");
             }
             catch (UnauthorizedAccessException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to persist profiling artifacts: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to persist profiling artifacts: {ex.Message}");
             }
             catch (NotSupportedException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to persist profiling artifacts: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to persist profiling artifacts: {ex.Message}");
             }
             catch (ArgumentException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to persist profiling artifacts: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to persist profiling artifacts: {ex.Message}");
             }
             catch (JsonException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to persist profiling artifacts: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to persist profiling artifacts: {ex.Message}");
             }
         }
 
@@ -891,27 +891,27 @@ namespace Schematica.Profiling
             }
             catch (IOException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
                 return SchematicaProfilingConfig.CreateDefault().Normalize();
             }
             catch (UnauthorizedAccessException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
                 return SchematicaProfilingConfig.CreateDefault().Normalize();
             }
             catch (NotSupportedException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
                 return SchematicaProfilingConfig.CreateDefault().Normalize();
             }
             catch (ArgumentException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
                 return SchematicaProfilingConfig.CreateDefault().Normalize();
             }
             catch (JsonException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load profiling config. Using defaults. Reason: {ex.Message}");
                 return SchematicaProfilingConfig.CreateDefault().Normalize();
             }
         }
@@ -939,7 +939,7 @@ namespace Schematica.Profiling
 
         private string GetProfilingRootDirectory()
         {
-            return capi.GetOrCreateDataPath("ModData/Schematica");
+            return capi.GetOrCreateDataPath("ModData/schematicaplus");
         }
 
         private string GetProfilesDirectory()
@@ -1111,3 +1111,6 @@ namespace Schematica.Profiling
         }
     }
 }
+
+
+

@@ -54,7 +54,7 @@ namespace Schematica.Rendering
         public bool HasProjection => ghostChunks.Count > 0 || chunkUpdateQueue.Count > 0;
         public int LoadedGhostChunkCount => ghostChunks.Count;
         public ISchematicaProfilingSink? ProfilingSink { get; set; }
-        public string RuntimeConfigPath => Path.Combine(capi.GetOrCreateDataPath("ModData/Schematica"), "schematica.runtime.json");
+        public string RuntimeConfigPath => Path.Combine(capi.GetOrCreateDataPath("ModData/schematicaplus"), "schematicaplus.runtime.json");
 
         public SchematicRenderer(ICoreClientAPI api, SchematicaModSystem modSystem)
         {
@@ -68,7 +68,7 @@ namespace Schematica.Rendering
             try
             {
                 string path = RuntimeConfigPath;
-                string directory = Path.GetDirectoryName(path) ?? capi.GetOrCreateDataPath("ModData/Schematica");
+                string directory = Path.GetDirectoryName(path) ?? capi.GetOrCreateDataPath("ModData/schematicaplus");
                 Directory.CreateDirectory(directory);
 
                 if (!File.Exists(path))
@@ -89,27 +89,27 @@ namespace Schematica.Rendering
             }
             catch (IOException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
                 runtimeConfig = SchematicRendererRuntimeConfig.CreateDefault().Normalize();
             }
             catch (UnauthorizedAccessException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
                 runtimeConfig = SchematicRendererRuntimeConfig.CreateDefault().Normalize();
             }
             catch (NotSupportedException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
                 runtimeConfig = SchematicRendererRuntimeConfig.CreateDefault().Normalize();
             }
             catch (ArgumentException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
                 runtimeConfig = SchematicRendererRuntimeConfig.CreateDefault().Normalize();
             }
             catch (JsonException ex)
             {
-                capi.Logger.Warning($"[Schematica] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
+                capi.Logger.Warning($"[Schematica Plus] Failed to load runtime config. Using defaults. Reason: {ex.Message}");
                 runtimeConfig = SchematicRendererRuntimeConfig.CreateDefault().Normalize();
             }
         }
@@ -151,7 +151,7 @@ namespace Schematica.Rendering
             {
                 currentLayer++;
                 UpdateRender();
-                capi.ShowChatMessage(Lang.Get("schematica:msg-layer", currentLayer, currentSchematic.MaxY));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-layer", currentLayer, currentSchematic.MaxY));
             }
         }
 
@@ -163,7 +163,7 @@ namespace Schematica.Rendering
             {
                 currentLayer--;
                 UpdateRender();
-                capi.ShowChatMessage(Lang.Get("schematica:msg-layer", currentLayer, currentSchematic.MaxY));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-layer", currentLayer, currentSchematic.MaxY));
             }
         }
 
@@ -270,7 +270,7 @@ namespace Schematica.Rendering
 
             if (ShouldEmitHotPathLog(ref lastRenderLogAtMs, runtimeConfig.RenderLogCooldownMs))
             {
-                capi.Logger.Debug($"[Schematica] BuildProjection: startPos={startPos}, blocks={blocks.Count}");
+                capi.Logger.Debug($"[Schematica Plus] BuildProjection: startPos={startPos}, blocks={blocks.Count}");
             }
 
             if (!projectionSafeMode)
@@ -409,7 +409,7 @@ namespace Schematica.Rendering
 
             if (ghostChunks.Count > 0 && deltaTime > 0 && ShouldEmitHotPathLog(ref lastRenderLogAtMs, runtimeConfig.RenderLogCooldownMs))
             {
-                capi.Logger.VerboseDebug($"[Schematica] Rendering {ghostChunks.Count} chunks");
+                capi.Logger.VerboseDebug($"[Schematica Plus] Rendering {ghostChunks.Count} chunks");
             }
 
             var prog = capi.Render.PreparedStandardShader(0, 0, 0);
@@ -432,7 +432,7 @@ namespace Schematica.Rendering
 
                 if (distance > 1000 && ShouldEmitHotPathLog(ref lastDistanceWarningAtMs, runtimeConfig.DistanceWarningCooldownMs))
                 {
-                    capi.Logger.Warning($"[Schematica] Chunks too far from camera: {distance} blocks");
+                    capi.Logger.Warning($"[Schematica Plus] Chunks too far from camera: {distance} blocks");
                 }
             }
 
@@ -561,7 +561,7 @@ namespace Schematica.Rendering
 
                 if (paritySet.Count != chunksToUpdate.Count && ShouldEmitHotPathLog(ref lastDistanceWarningAtMs, runtimeConfig.DistanceWarningCooldownMs))
                 {
-                    capi.Logger.Warning($"[Schematica] Chunk range parity mismatch. legacy={paritySet.Count}, optimized={chunksToUpdate.Count}");
+                    capi.Logger.Warning($"[Schematica Plus] Chunk range parity mismatch. legacy={paritySet.Count}, optimized={chunksToUpdate.Count}");
                 }
             }
 
@@ -672,7 +672,7 @@ namespace Schematica.Rendering
                 chunkIndexFallbackActive = true;
                 if (ShouldEmitHotPathLog(ref lastDistanceWarningAtMs, runtimeConfig.DistanceWarningCooldownMs))
                 {
-                    capi.Logger.Warning($"[Schematica] Chunk index miss detected for {chunkPos}. Falling back to safe scan mode.");
+                    capi.Logger.Warning($"[Schematica Plus] Chunk index miss detected for {chunkPos}. Falling back to safe scan mode.");
                 }
                 return fallbackSource;
             }
@@ -952,11 +952,11 @@ namespace Schematica.Rendering
                     }
                     catch (FormatException ex)
                     {
-                        capi.Logger.Warning($"[Schematica] Failed to create chiseled mesh: {ex.Message}");
+                        capi.Logger.Warning($"[Schematica Plus] Failed to create chiseled mesh: {ex.Message}");
                     }
                     catch (IOException ex)
                     {
-                        capi.Logger.Warning($"[Schematica] Failed to create chiseled mesh: {ex.Message}");
+                        capi.Logger.Warning($"[Schematica Plus] Failed to create chiseled mesh: {ex.Message}");
                     }
                 }
 
@@ -999,3 +999,6 @@ namespace Schematica.Rendering
         }
     }
 }
+
+
+

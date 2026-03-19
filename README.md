@@ -1,6 +1,6 @@
-# Schematica
+# Schematica Plus
 
-Schematica is a client-side Vintage Story mod for capturing structures as schematics, loading them back into the game, and previewing placement as a ghost projection.
+Schematica Plus is a client-side Vintage Story mod for capturing structures as schematics, loading them back into the game, and previewing placement as a ghost projection.
 
 The projection is comparison-based: it highlights blocks that are missing or incorrect at the target position instead of drawing a full solid blueprint over blocks that already match.
 
@@ -18,7 +18,7 @@ The projection is comparison-based: it highlights blocks that are missing or inc
 
 ## How It Works
 
-Schematica compares the loaded schematic against the current world at the chosen render origin.
+Schematica Plus compares the loaded schematic against the current world at the chosen render origin.
 
 - Missing blocks are rendered as white ghost blocks.
 - Wrong blocks are rendered as red ghost blocks.
@@ -30,7 +30,7 @@ This means a preview can appear empty when the target area already matches the s
 
 ### GUI
 
-- Press `L` to open the main Schematica menu.
+- Press `L` to open the main Schematica Plus menu.
 - Open the save dialog to capture a selected area.
 - Open the load dialog to:
   - choose a schematic
@@ -41,13 +41,13 @@ This means a preview can appear empty when the target area already matches the s
 
 ### Hotkeys
 
-- `L`: open or close the main Schematica GUI
+- `L`: open or close the main Schematica Plus GUI
 - `PageUp`: next layer
 - `PageDown`: previous layer
 
 ### Commands
 
-Schematica registers the `.schem` command group.
+Schematica Plus registers the `.schem` command group.
 
 - `.schem start`
   Sets the first selection point from the currently targeted block.
@@ -72,7 +72,7 @@ Schematica registers the `.schem` command group.
 - `.schem list`
   Lists available schematics.
 - `.schem gui`
-  Opens the Schematica GUI.
+  Opens the Schematica Plus GUI.
 
 ### Profiling Commands
 
@@ -89,8 +89,8 @@ Profiling support is built in for renderer and projection analysis.
 ## Data Locations
 
 - Schematics: `VintagestoryData/ModData/Schematics`
-- Renderer runtime config: `VintagestoryData/ModData/Schematica/schematica.runtime.json`
-- Profiling config and outputs: `VintagestoryData/ModData/Schematica`
+- Renderer runtime config: `VintagestoryData/ModData/schematicaplus/schematicaplus.runtime.json`
+- Profiling config and outputs: `VintagestoryData/ModData/schematicaplus`
 
 ## Build From Source
 
@@ -141,4 +141,6 @@ Check the following:
 - The target area does not already fully match the schematic.
 - The loaded schematic file exists under `VintagestoryData/ModData/Schematics`.
 
-If needed, use `.schem profile burst <seconds>` and inspect the game logs for Schematica debug output.
+If needed, use `.schem profile burst <seconds>` and inspect the game logs for Schematica Plus debug output.
+
+

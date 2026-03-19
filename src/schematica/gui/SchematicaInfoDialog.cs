@@ -36,9 +36,9 @@ namespace Schematica.GUI
 
             try
             {
-                SingleComposer = capi.Gui.CreateCompo("schematicainfo", dialogBounds)
+                SingleComposer = capi.Gui.CreateCompo("schematicaplusinfo", dialogBounds)
                     .AddShadedDialogBG(bounds)
-                    .AddDialogTitleBar(Lang.Get("schematica:gui-info-title"), OnTitleBarCloseClicked)
+                    .AddDialogTitleBar(Lang.Get("schematicaplus:gui-info-title"), OnTitleBarCloseClicked)
                     .BeginChildElements(bounds);
 
                 var font = CairoFont.WhiteDetailText();
@@ -48,13 +48,13 @@ namespace Schematica.GUI
                 SingleComposer.AddRichtext(infoText, font, textBounds);
 
                 var buttonBounds = ElementBounds.Fixed(150, 340, 100, 30);
-                SingleComposer.AddSmallButton(Lang.Get("schematica:gui-close"), OnCloseClick, buttonBounds);
+                SingleComposer.AddSmallButton(Lang.Get("schematicaplus:gui-close"), OnCloseClick, buttonBounds);
 
                 SingleComposer.EndChildElements().Compose();
             }
             catch (InvalidOperationException ex)
             {
-                capi.Logger.Error($"[Schematica] Error creating info dialog: {ex.Message}");
+                capi.Logger.Error($"[Schematica Plus] Error creating info dialog: {ex.Message}");
                 TryClose();
             }
         }
@@ -63,18 +63,18 @@ namespace Schematica.GUI
         {
             if (schematic == null)
             {
-                return Lang.Get("schematica:gui-no-schematic-data");
+                return Lang.Get("schematicaplus:gui-no-schematic-data");
             }
 
             var sb = new StringBuilder();
             var culture = CultureInfo.InvariantCulture;
-            sb.AppendLine(string.Format(culture, "{0}: {1} x {2} x {3}", Lang.Get("schematica:gui-size"), schematic.SizeX, schematic.SizeY, schematic.SizeZ));
-            sb.AppendLine(string.Format(culture, "{0}: {1}", Lang.Get("schematica:gui-total-blocks"), schematic.TotalBlocks));
+            sb.AppendLine(string.Format(culture, "{0}: {1} x {2} x {3}", Lang.Get("schematicaplus:gui-size"), schematic.SizeX, schematic.SizeY, schematic.SizeZ));
+            sb.AppendLine(string.Format(culture, "{0}: {1}", Lang.Get("schematicaplus:gui-total-blocks"), schematic.TotalBlocks));
             sb.AppendLine();
 
             if (schematic.BlockCounts.Count > 0)
             {
-                sb.AppendLine(Lang.Get("schematica:gui-required-blocks"));
+                sb.AppendLine(Lang.Get("schematicaplus:gui-required-blocks"));
 
                 var sortedBlocks = schematic.BlockCounts
                     .OrderByDescending(x => x.Value)
@@ -88,12 +88,12 @@ namespace Schematica.GUI
 
                 if (schematic.BlockCounts.Count > 15)
                 {
-                    sb.AppendLine(string.Format(culture, "  {0}", Lang.Get("schematica:gui-and-more", schematic.BlockCounts.Count - 15)));
+                    sb.AppendLine(string.Format(culture, "  {0}", Lang.Get("schematicaplus:gui-and-more", schematic.BlockCounts.Count - 15)));
                 }
             }
             else
             {
-                sb.AppendLine(Lang.Get("schematica:gui-no-block-info"));
+                sb.AppendLine(Lang.Get("schematicaplus:gui-no-block-info"));
             }
 
             return sb.ToString();
@@ -101,7 +101,7 @@ namespace Schematica.GUI
 
         private static string CleanBlockName(string blockCode)
         {
-            if (string.IsNullOrEmpty(blockCode)) return Lang.Get("schematica:gui-unknown");
+            if (string.IsNullOrEmpty(blockCode)) return Lang.Get("schematicaplus:gui-unknown");
 
             // Remove game: prefix
             string clean = blockCode.Replace("game:", string.Empty, StringComparison.Ordinal);
@@ -134,3 +134,6 @@ namespace Schematica.GUI
         }
     }
 }
+
+
+

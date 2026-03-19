@@ -44,7 +44,7 @@ namespace Schematica
             commands = new SchematicCommands(api, this);
 
             // Register renderer
-            api.Event.RegisterRenderer(Renderer, EnumRenderStage.Opaque, "schematica_projection");
+            api.Event.RegisterRenderer(Renderer, EnumRenderStage.Opaque, "schematicaplus_projection");
             reloadTexturesHandler = () =>
             {
                 Renderer.ClearRuntimeCaches();
@@ -53,14 +53,14 @@ namespace Schematica
             api.Event.ReloadTextures += reloadTexturesHandler;
 
             // Register GUI hotkey
-            api.Input.RegisterHotKey("schematica_gui", "Open Schematica GUI", GlKeys.L, HotkeyType.GUIOrOtherControls);
-            api.Input.SetHotKeyHandler("schematica_gui", OnGuiHotkey);
+            api.Input.RegisterHotKey("schematicaplus_gui", "Open Schematica Plus GUI", GlKeys.L, HotkeyType.GUIOrOtherControls);
+            api.Input.SetHotKeyHandler("schematicaplus_gui", OnGuiHotkey);
 
             // Register layer hotkeys
-            api.Input.RegisterHotKey("schematica_layer_up", "Schematica Layer Up", GlKeys.PageUp, HotkeyType.GUIOrOtherControls);
-            api.Input.RegisterHotKey("schematica_layer_down", "Schematica Layer Down", GlKeys.PageDown, HotkeyType.GUIOrOtherControls);
-            api.Input.SetHotKeyHandler("schematica_layer_up", (t) => { Renderer.NextLayer(); return true; });
-            api.Input.SetHotKeyHandler("schematica_layer_down", (t) => { Renderer.PreviousLayer(); return true; });
+            api.Input.RegisterHotKey("schematicaplus_layer_up", "Schematica Plus Layer Up", GlKeys.PageUp, HotkeyType.GUIOrOtherControls);
+            api.Input.RegisterHotKey("schematicaplus_layer_down", "Schematica Plus Layer Down", GlKeys.PageDown, HotkeyType.GUIOrOtherControls);
+            api.Input.SetHotKeyHandler("schematicaplus_layer_up", (t) => { Renderer.NextLayer(); return true; });
+            api.Input.SetHotKeyHandler("schematicaplus_layer_down", (t) => { Renderer.PreviousLayer(); return true; });
 
             // Register tick listener for updating chunks
             updateTickListenerId = api.Event.RegisterGameTickListener((dt) =>
@@ -203,3 +203,6 @@ namespace Schematica
         public bool ShowAllLayers { get; set; }
     }
 }
+
+
+

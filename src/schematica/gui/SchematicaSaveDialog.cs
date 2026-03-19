@@ -52,16 +52,16 @@ namespace Schematica.GUI
             bgBounds.BothSizing = ElementSizing.FitToChildren;
 
             var composer = capi.Gui
-                .CreateCompo("schematica_save_dialog", dialogBounds)
+                .CreateCompo("schematicaplus_save_dialog", dialogBounds)
                 .AddShadedDialogBG(bgBounds)
-                .AddDialogTitleBar(Lang.Get("schematica:gui-save-title"), OnTitleBarClose, CairoFont.WhiteDetailText())
+                .AddDialogTitleBar(Lang.Get("schematicaplus:gui-save-title"), OnTitleBarClose, CairoFont.WhiteDetailText())
                 .BeginChildElements(bgBounds);
 
             var builder = new SchematicaUIBuilder(composer, capi);
 
             // First point controls
             builder.AddCoordinateInputs(
-                Lang.Get("schematica:gui-first-point"), 30,
+                Lang.Get("schematicaplus:gui-first-point"), 30,
                 OnFirstXChanged, OnFirstYChanged, OnFirstZChanged,
                 () => { ModifyCoord(true, 'x', -1); return true; },
                 () => { ModifyCoord(true, 'x', 1); return true; },
@@ -72,12 +72,12 @@ namespace Schematica.GUI
                 "firstX", "firstY", "firstZ"
             );
 
-            composer.AddSmallButton(Lang.Get("schematica:gui-use-player-pos"), OnFirstPlayerPos,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-use-player-pos"), OnFirstPlayerPos,
                 ElementBounds.Fixed(20, 120, 150, 30), EnumButtonStyle.Normal);
 
             // Second point controls
             builder.AddCoordinateInputs(
-                Lang.Get("schematica:gui-second-point"), 160,
+                Lang.Get("schematicaplus:gui-second-point"), 160,
                 OnSecondXChanged, OnSecondYChanged, OnSecondZChanged,
                 () => { ModifyCoord(false, 'x', -1); return true; },
                 () => { ModifyCoord(false, 'x', 1); return true; },
@@ -88,14 +88,14 @@ namespace Schematica.GUI
                 "secondX", "secondY", "secondZ"
             );
 
-            composer.AddSmallButton(Lang.Get("schematica:gui-use-player-pos"), OnSecondPlayerPos,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-use-player-pos"), OnSecondPlayerPos,
                 ElementBounds.Fixed(280, 120, 150, 30), EnumButtonStyle.Normal);
 
             // Filename and save
-            composer.AddStaticText(Lang.Get("schematica:gui-filename"), CairoFont.WhiteDetailText(),
+            composer.AddStaticText(Lang.Get("schematicaplus:gui-filename"), CairoFont.WhiteDetailText(),
                 ElementBounds.Fixed(20, 280, 70, 25));
             composer.AddTextInput(ElementBounds.Fixed(100, 275, 200, 30), null, CairoFont.TextInput(), "filename");
-            composer.AddSmallButton(Lang.Get("schematica:gui-save"), OnSaveClick,
+            composer.AddSmallButton(Lang.Get("schematicaplus:gui-save"), OnSaveClick,
                 ElementBounds.Fixed(320, 275, 80, 30), EnumButtonStyle.Normal);
 
             SingleComposer = composer.EndChildElements().Compose();
@@ -242,7 +242,7 @@ namespace Schematica.GUI
             var filename = SingleComposer.GetTextInput("filename").GetText();
             if (string.IsNullOrEmpty(filename))
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-please-filename"));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-please-filename"));
                 return true;
             }
 
@@ -250,7 +250,7 @@ namespace Schematica.GUI
             {
                 var schematic = BlockSchematicStructure.CreateFromSelection(capi, firstPoint, secondPoint);
                 BlockSchematicStructure.SaveToFile(capi, schematic, filename);
-                capi.ShowChatMessage(Lang.Get("schematica:msg-schematic-saved", filename, schematic.TotalBlocks));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-schematic-saved", filename, schematic.TotalBlocks));
 
                 // Save state
                 modSystem.GuiState.FirstPoint = firstPoint.Copy();
@@ -261,19 +261,19 @@ namespace Schematica.GUI
             }
             catch (JsonException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-save", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
             catch (IOException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-save", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
             catch (UnauthorizedAccessException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-save", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
             catch (InvalidOperationException ex)
             {
-                capi.ShowChatMessage(Lang.Get("schematica:msg-failed-save", ex.Message));
+                capi.ShowChatMessage(Lang.Get("schematicaplus:msg-failed-save", ex.Message));
             }
 
             return true;
@@ -292,3 +292,6 @@ namespace Schematica.GUI
         }
     }
 }
+
+
+
