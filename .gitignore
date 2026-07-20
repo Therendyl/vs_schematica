@@ -34,3 +34,6 @@ desktop.ini
 # Mod-specific generated settings
 /Properties/localSettings.props
 properties/localSettings.props
+
+# graphify knowledge-graph output (generated locally)
+graphify-out/
